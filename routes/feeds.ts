@@ -1,8 +1,18 @@
-import express from "express";
-const router = express.Router();
+import express from "express"
+import validate from "../validators/feeds"
+const router = express.Router()
 
 // define a route handler for the default home page
-router.post("/", async (req, res) => {});
-router.get("/:feedName", async (req, res) => {});
+router.post(
+  "/",
+  validate,
+  async (request: express.Request, response: express.Request) => {
+    console.log("route")
+  }
+)
+router.get(
+  "/:feedName",
+  async (request: express.Request, response: express.Request) => {}
+)
 
-module.exports = router;
+module.exports = router

@@ -1,0 +1,20 @@
+{
+  "name": "crowdanalyzer-conversations-feed",
+  "version": "1.0.0",
+  "description": "It's Crowdanalyzer Technical Assesment For Hiring Process",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmrAyoub97/crowdanalyzer-conversations-feed.git"
+  },
+  "author": "Amr Ayman Ayoub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmrAyoub97/crowdanalyzer-conversations-feed/issues"
+  },
+  "homepage": "https://github.com/AmrAyoub97/crowdanalyzer-conversations-feed#readme"
+}

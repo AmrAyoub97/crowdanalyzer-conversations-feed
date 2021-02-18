@@ -7,8 +7,7 @@ const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/reports", require("./routes/reports"));
-app.use("/upload", require("./routes/upload"));
+app.use("/feeds", require("./routes/feeds"));
 
 // start the express server
 app.listen(port, () => {

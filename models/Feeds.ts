@@ -37,4 +37,4 @@ const FeedsSchema = new MongoSchema({
   filters: filtersSchema,
 })
 
-module.exports = mongoose.model("Feeds", FeedsSchema)
+export default mongoose.model("Feeds", FeedsSchema)

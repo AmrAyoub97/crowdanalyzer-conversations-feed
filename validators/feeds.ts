@@ -28,7 +28,7 @@ const filtersSchema = Joi.object({
 }).or("gender", "dialect", "language", "followers_count_range")
 
 const feedsSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
+  name: Joi.string().token().min(3).max(30).required(),
   filters: filtersSchema.required(),
 })
 

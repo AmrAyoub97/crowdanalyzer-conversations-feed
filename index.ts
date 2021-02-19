@@ -1,12 +1,15 @@
 import express from "express"
 import init_db_connection from "./db"
+import { init_es_index } from "./es-client"
 require("dotenv").config()
+
 const app = express()
 const port = process.env.PORT || 3000
 
 //middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+init_es_index()
 init_db_connection()
 app.use("/feeds", require("./routes/feeds"))
 
@@ -16,4 +19,3 @@ const server = app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`)
 })
 module.exports = server
-  

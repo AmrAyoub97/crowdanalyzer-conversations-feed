@@ -11,7 +11,9 @@ init_db_connection()
 app.use("/feeds", require("./routes/feeds"))
 
 // start the express server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   // tslint:disable-next-line:no-console
   console.log(`server started at http://localhost:${port}`)
 })
+module.exports = server
+  

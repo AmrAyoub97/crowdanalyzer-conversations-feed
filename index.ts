@@ -7,11 +7,12 @@ const port = process.env.PORT || 3000
 //middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-init_db_connection()
+//init_db_connection()
 app.use("/feeds", require("./routes/feeds"))
 
 // start the express server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   // tslint:disable-next-line:no-console
   console.log(`server started at http://localhost:${port}`)
 })
+module.exports = server

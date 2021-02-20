@@ -6,8 +6,7 @@ function validate(
   response: express.Response,
   next: express.NextFunction
 ) {
-  const feed = request.body
-  const { error, value } = feedsSchema.validate(feed)
+  const { error, value } = feedsSchema.validate(request.body)
   if (error) return response.status(400).send(error.message)
   next()
 }

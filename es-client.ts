@@ -1,18 +1,8 @@
 import elasticsearch from "elasticsearch"
 import fs from "fs"
+import { conversation, filters } from "./interfaces/feed"
 require("dotenv").config()
 
-interface conversation {
-  id: number
-  text: string
-  user_gender: "male" | "female" | "virtual"
-  lang: "ar" | "en"
-  dialect: "eg" | "gf" | "std"
-  user: {
-    id: number
-    followers_count: number
-  }
-}
 const esClient = new elasticsearch.Client({
   host: `http://${process.env.ES_HOSTNAME}:${process.env.ES_PORT}`,
 })
@@ -54,16 +44,60 @@ export async function init_es_index() {
     .catch(err => console.log("error", err))
 }
 
-export async function search(query: any) {
-  const response = await esClient.search({
-    index: " conversations",
-    type: "conversation",
+export async function search(feedFilters: filters) {
+  let esFilters: any = []
+  Object.keys(feedFilters).forEach(key => {
+    switch (key) {
+      case "language":
+        feedFilters?.language?.length &&
+          esFilters.push({
+            terms: {
+              lang: feedFilters?.language,
+            },
+          })
+        break
+      case "dialect":
+        feedFilters?.dialect?.length &&
+          esFilters.push({
+            terms: {
+              dialect: feedFilters?.dialect,
+            },
+          })
+        break
+      case "gender":
+        feedFilters?.gender?.length &&
+          esFilters.push({
+            terms: {
+              user_gender: feedFilters?.gender,
+            },
+          })
+        break
+      case "followers_count_range":
+        esFilters.push({
+          range: {
+            "user.followers_count": {
+              gte: feedFilters?.followers_count_range?.gte,
+              lte: feedFilters?.followers_count_range?.lte,
+            },
+          },
+        })
+        break
+      default:
+        break
+    }
+  })
+  const results = await esClient.search({
+    index: "conversations",
     body: {
       query: {
-        match: {
-          text: query,
+        bool: {
+          must: esFilters,
         },
       },
     },
   })
+  const res = results.hits.hits.map(item => {
+    return item._source
+  })
+  return res
 }

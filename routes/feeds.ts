@@ -1,6 +1,8 @@
 import express from "express"
 import validate from "../middlewares/feeds"
 import Feeds from "../models/Feeds"
+import { search } from "../es-client"
+import { feed } from "../interfaces/feed"
 const router = express.Router()
 
 router.post(
@@ -9,11 +11,9 @@ router.post(
   async (request: express.Request, response: express.Response) => {
     try {
       const feed = request.body
-      console.log("route path")
-      await Feeds.create(feed, (err: any) => {
-        if (err) throw new Error(err)
-      })
-      return response.status(200).send("Valid")
+      Feeds.create(feed)
+        .then(() => response.status(200).send(feed))
+        .catch(() => response.status(400).send("duplicate key error"))
     } catch (error) {
       return response.sendStatus(500)
     }
@@ -27,7 +27,6 @@ router.get(
       const feeds = await Feeds.find({})
       return response.status(200).send(feeds)
     } catch (error) {
-      console.log("error", error)
       return response.sendStatus(500)
     }
   }
@@ -35,7 +34,18 @@ router.get(
 
 router.get(
   "/:feedName",
-  async (request: express.Request, response: express.Response) => {}
+  async (request: express.Request, response: express.Response) => {
+    try {
+      const feedName = request.params.feedName
+      const doc = await Feeds.findOne({ name: feedName })
+      if (!doc) return response.status(400).send("Filter Feed Doesn't Exist")
+      const feed: feed = JSON.parse(JSON.stringify(doc))
+      const result = await search(feed.filters)
+      return response.status(200).send(result)
+    } catch (error) {
+      return response.sendStatus(500)
+    }
+  }
 )
 
 module.exports = router

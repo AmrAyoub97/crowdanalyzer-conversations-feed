@@ -36,6 +36,11 @@ services:
       timeout: 5s
       retries: 30
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    ports:
+      - "5601:5601"
+
   # app:
   #   build: .
   #   depends_on:

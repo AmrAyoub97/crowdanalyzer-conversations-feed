@@ -13,7 +13,7 @@ const filtersSchema = Joi.object({
     })
     .max(3),
   dialect: Joi.array()
-    .items(Joi.string().valid("gf", "std", "egy"))
+    .items(Joi.string().valid("gf", "std", "eg"))
     .unique(function comparator(a, b) {
       return a === b
     })

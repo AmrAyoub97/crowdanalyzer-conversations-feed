@@ -45,12 +45,17 @@ export async function init_es_index() {
 }
 
 export async function search(query: any) {
-  const response = await esClient.search({
-    index: " conversations",
+  const results = await esClient.search({
+    index: "conversations",
     body: {
       query: {
         bool: {
           filter: {
+            terms: {
+              gender: query.filters.gender,
+              language: query.filters.language,
+              dialect: query.filters.dialect,
+            },
             range: {
               "user.followers_count": {
                 gte: query.filters.followers_count_range.gte,
@@ -62,4 +67,5 @@ export async function search(query: any) {
       },
     },
   })
+  return results
 }

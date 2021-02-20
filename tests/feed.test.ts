@@ -27,7 +27,7 @@ describe("Feeds API", () => {
     })
     it("should return status code 200, and should be valid", async () => {
       const feed = {
-        name: "Marketing_Feed",
+        name: "Marketing_Feed_1",
         filters: {
           gender: ["virtual", "female"],
           dialect: ["gf", "std"],
@@ -38,7 +38,7 @@ describe("Feeds API", () => {
     })
     it("should return status code 200, and should be valid", async () => {
       const feed = {
-        name: "Marketing_Feed",
+        name: "Marketing_Feed_2",
         filters: {
           gender: ["male", "female"],
           dialect: ["gf", "egy"],
@@ -48,7 +48,7 @@ describe("Feeds API", () => {
     })
     it("should return status code 200, and should be valid", async () => {
       const feed = {
-        name: "Marketing_Feed",
+        name: "Marketing_Feed_3",
         filters: {
           gender: ["male", "virtual"],
         },
@@ -78,7 +78,7 @@ describe("Feeds API", () => {
     //Invalid filters object is undefined
     it("should return status code 400, and shouldn't be valid", async () => {
       const feed = {
-        name: "Marketing_Feed",
+        name: "Marketing_Feed_3",
       }
       await request(server).post("/feeds").send(feed).expect(400)
     })

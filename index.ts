@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000
 //middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-init_es_index()
+//init_es_index()
 init_db_connection()
 app.use("/feeds", require("./routes/feeds"))
 

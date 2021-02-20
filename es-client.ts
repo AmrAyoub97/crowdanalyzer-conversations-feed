@@ -1,18 +1,8 @@
 import elasticsearch from "elasticsearch"
 import fs from "fs"
+import { conversation } from "./interfaces/feed"
 require("dotenv").config()
 
-interface conversation {
-  id: number
-  text: string
-  user_gender: "male" | "female" | "virtual"
-  lang: "ar" | "en"
-  dialect: "eg" | "gf" | "std"
-  user: {
-    id: number
-    followers_count: number
-  }
-}
 const esClient = new elasticsearch.Client({
   host: `http://${process.env.ES_HOSTNAME}:${process.env.ES_PORT}`,
 })
@@ -57,11 +47,17 @@ export async function init_es_index() {
 export async function search(query: any) {
   const response = await esClient.search({
     index: " conversations",
-    type: "conversation",
     body: {
       query: {
-        match: {
-          text: query,
+        bool: {
+          filter: {
+            range: {
+              "user.followers_count": {
+                gte: query.filters.followers_count_range.gte,
+                lte: query.filters.followers_count_range.lte,
+              },
+            },
+          },
         },
       },
     },

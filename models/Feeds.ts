@@ -2,8 +2,8 @@ import mongoose from "mongoose"
 const MongoSchema = mongoose.Schema
 
 const followersCountRangeSchema = new MongoSchema({
-  gte: { type: Number, min: 0 },
-  lte: { type: Number, min: 0 },
+  gte: { type: Number, min: 0, default: null },
+  lte: { type: Number, min: 0, default: null },
 })
 
 const filtersSchema = new MongoSchema({
@@ -11,16 +11,19 @@ const filtersSchema = new MongoSchema({
     type: [String],
     enum: ["male", "female", "virtual"],
     lowercase: true,
+    default: [],
   },
   dialect: {
     type: [String],
-    enum: ["gf", "std", "egy"],
+    enum: ["gf", "std", "eg"],
     lowercase: true,
+    default: [],
   },
   language: {
     type: [String],
     enum: ["ar", "en"],
     lowercase: true,
+    default: [],
   },
   followers_count_range: followersCountRangeSchema,
 })

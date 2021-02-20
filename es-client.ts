@@ -18,6 +18,7 @@ const esClient = new elasticsearch.Client({
 })
 
 export async function init_es_index() {
+  console.log("init_es_index")
   let bulkBody: any[] = []
 
   const conversations: conversation[] = JSON.parse(
@@ -39,7 +40,6 @@ export async function init_es_index() {
   esClient
     .bulk({ refresh: true, body: bulkBody })
     .then(response => {
-      console.log("here")
       let errorCount = 0
       response.items.forEach((item: any) => {
         if (item.index && item.index.error) {
@@ -61,7 +61,7 @@ export async function search(query: any) {
     body: {
       query: {
         match: {
-          body: "elasticsearch",
+          text: query,
         },
       },
     },

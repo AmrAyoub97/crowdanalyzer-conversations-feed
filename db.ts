@@ -9,6 +9,7 @@ const DB_CONNECTION_OPTIONS = {
   useFindAndModify: false,
 }
 function init_db_connection() {
+  console.log("init_db_connection")
   mongoose
     .connect(DB_CONNECTION_STRING, DB_CONNECTION_OPTIONS)
     .then(function () {

@@ -11,18 +11,21 @@ const filtersSchema = Joi.object({
     .unique(function comparator(a, b) {
       return a === b
     })
+    .min(1)
     .max(3),
   dialect: Joi.array()
     .items(Joi.string().valid("gf", "std", "eg"))
     .unique(function comparator(a, b) {
       return a === b
     })
+    .min(1)
     .max(3),
   language: Joi.array()
     .items(Joi.string().valid("ar", "en"))
     .unique(function comparator(a, b) {
       return a === b
     })
+    .min(1)
     .max(2),
   followers_count_range: followersCountRangeSchema,
 }).or("gender", "dialect", "language", "followers_count_range")

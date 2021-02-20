@@ -10,10 +10,10 @@ export interface conversation {
   }
 }
 export interface filters {
-  gender: ["male" | "female" | "virtual"] | []
-  language: ["ar" | "en"] | []
-  dialect: ["eg" | "gf" | "std"] | []
-  followers_count_range: {
+  gender?: ["male" | "female" | "virtual"]
+  language?: ["ar" | "en"]
+  dialect?: ["eg" | "gf" | "std"]
+  followers_count_range?: {
     gte: number | null
     lte: number | null
   }

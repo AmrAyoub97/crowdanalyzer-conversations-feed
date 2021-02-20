@@ -1,5 +1,4 @@
 import express from "express"
-import { feed } from "../interfaces/feed"
 import feedsSchema from "../validators/feeds"
 
 function validate(

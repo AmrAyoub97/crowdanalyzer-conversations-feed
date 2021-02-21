@@ -31,7 +31,6 @@ const filtersSchema = new MongoSchema({
 // Create Feeds Mongo Schema
 const FeedsSchema = new MongoSchema({
   name: {
-    index: true,
     type: String,
     lowercase: true,
     required: true,
@@ -40,4 +39,4 @@ const FeedsSchema = new MongoSchema({
   filters: filtersSchema,
 })
 
-export default mongoose.model("Feeds", FeedsSchema)
+export default mongoose.model("Feed", FeedsSchema)

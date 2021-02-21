@@ -11,7 +11,7 @@ router.post(
   async (request: express.Request, response: express.Response) => {
     try {
       const feed = request.body
-      Feeds.create(feed)
+      await Feeds.create(feed)
         .then(() => response.status(200).send(feed))
         .catch(() => response.status(400).send("duplicate key error"))
     } catch (error) {

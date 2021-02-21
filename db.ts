@@ -5,8 +5,6 @@ const DB_CONNECTION_STRING = `mongodb://${process.env.MONGO_HOSTNAME}:${process.
 const DB_CONNECTION_OPTIONS = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
 }
 function init_db_connection() {
   console.log("init_db_connection")

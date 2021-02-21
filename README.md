@@ -41,5 +41,5 @@ Create Feeds and Filter Conversations, through the endpoints.
 
 | Action                       | Endpoint URL      | Verb | Request Body | Response                                             |
 | ---------------------------- | ----------------- | ---- | ------------ | ---------------------------------------------------- |
-| Create New Feed              | /feeds            | POST |              | `{"name":"app_name"}`                                |
-| Filter Conversations By Feed | /feeds/:feed_name | GET  |              | `[{"chat_number":"","message_number":"","body":""}]` |
+| Create New Feed              | /feeds            | POST |              | ``                                |
+| Filter Conversations By Feed | /feeds/:feed_name | GET  |              | `` |

@@ -49,7 +49,7 @@ export async function search(feedFilters: filters) {
   Object.keys(feedFilters).forEach(key => {
     switch (key) {
       case "language":
-        feedFilters?.language?.length &&
+        feedFilters?.language &&
           esFilters.push({
             terms: {
               lang: feedFilters?.language,
@@ -57,7 +57,7 @@ export async function search(feedFilters: filters) {
           })
         break
       case "dialect":
-        feedFilters?.dialect?.length &&
+        feedFilters?.dialect &&
           esFilters.push({
             terms: {
               dialect: feedFilters?.dialect,
@@ -65,26 +65,24 @@ export async function search(feedFilters: filters) {
           })
         break
       case "gender":
-        feedFilters?.gender?.length &&
+        feedFilters?.gender &&
           esFilters.push({
             terms: {
               user_gender: feedFilters?.gender,
             },
           })
         break
-      case "followers_count_range":
-        esFilters.push({
-          range: {
-            "user.followers_count": {
-              gte: feedFilters?.followers_count_range?.gte,
-              lte: feedFilters?.followers_count_range?.lte,
-            },
-          },
-        })
-        break
       default:
         break
     }
+  })
+  esFilters.push({
+    range: {
+      "user.followers_count": {
+        gte: feedFilters?.followers_count_range?.gte,
+        lte: feedFilters?.followers_count_range?.lte,
+      },
+    },
   })
   const results = await esClient.search({
     index: "conversations",

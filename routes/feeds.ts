@@ -10,10 +10,10 @@ router.post(
   validate,
   async (request: express.Request, response: express.Response) => {
     try {
-      const feed = request.body
+      const feed: feed = request.body
       await Feeds.create(feed)
-        .then(() => response.status(200).send(feed))
-        .catch(() => response.status(400).send("duplicate key error"))
+        .then(() => response.status(200).send({ feed_name: feed.name }))
+        .catch(() => response.status(400).send("Feed Name Is ALready Exists"))
     } catch (error) {
       return response.sendStatus(500)
     }
@@ -24,7 +24,7 @@ router.get(
   "/",
   async (request: express.Request, response: express.Response) => {
     try {
-      const feeds = await Feeds.find({})
+      const feeds = await Feeds.find({}).select("- _id")
       return response.status(200).send(feeds)
     } catch (error) {
       return response.sendStatus(500)

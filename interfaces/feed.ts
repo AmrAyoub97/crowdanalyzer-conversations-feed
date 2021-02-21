@@ -14,8 +14,8 @@ export interface filters {
   language?: ["ar" | "en"]
   dialect?: ["eg" | "gf" | "std"]
   followers_count_range?: {
-    gte: number | null
-    lte: number | null
+    gte?: number | null
+    lte?: number | null
   }
 }
 export interface feed {

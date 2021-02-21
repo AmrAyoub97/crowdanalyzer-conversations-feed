@@ -23,7 +23,9 @@ export async function init_es_index() {
         _id: item.id,
       },
     })
-
+    if (!item.user_gender) {
+      delete item.user_gender
+    }
     bulkBody.push(item)
   })
 
@@ -98,9 +100,9 @@ export async function search(feedFilters: filters) {
       },
     },
   })
-  const res = results.hits.hits.map(item => {
+  const filteredConversations = results.hits.hits.map(item => {
     return item._source
   })
-  
-  return res
+
+  return filteredConversations
 }

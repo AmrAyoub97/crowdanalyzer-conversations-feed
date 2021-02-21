@@ -1,6 +1,6 @@
 import express from "express"
-import init_db_connection from "./db"
-import { init_es_index } from "./es-client"
+import init_db_connection from "./clients/db"
+import { init_es_index } from "./clients/es-client"
 require("dotenv").config()
 
 const app = express()

@@ -1,6 +1,6 @@
 import elasticsearch from "elasticsearch"
 import fs from "fs"
-import { conversation, filters } from "./interfaces/feed"
+import { conversation, filters } from "../interfaces/feed"
 require("dotenv").config()
 
 const esClient = new elasticsearch.Client({
@@ -69,6 +69,17 @@ export async function search(feedFilters: filters) {
           esFilters.push({
             terms: {
               user_gender: feedFilters?.gender,
+            },
+          })
+        break
+      case "followers_count_range":
+        feedFilters?.followers_count_range &&
+          esFilters.push({
+            range: {
+              "user.followers_count": {
+                gte: feedFilters?.followers_count_range?.gte,
+                lte: feedFilters?.followers_count_range?.lte,
+              },
             },
           })
         break

@@ -87,14 +87,7 @@ export async function search(feedFilters: filters) {
         break
     }
   })
-  esFilters.push({
-    range: {
-      "user.followers_count": {
-        gte: feedFilters?.followers_count_range?.gte,
-        lte: feedFilters?.followers_count_range?.lte,
-      },
-    },
-  })
+
   const results = await esClient.search({
     index: "conversations",
     body: {
@@ -108,5 +101,6 @@ export async function search(feedFilters: filters) {
   const res = results.hits.hits.map(item => {
     return item._source
   })
+  
   return res
 }

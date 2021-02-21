@@ -1,7 +1,7 @@
 import express from "express"
 import validate from "../middlewares/feeds"
 import Feeds from "../models/Feeds"
-import { search } from "../es-client"
+import { search } from "../clients/es-client"
 import { feed } from "../interfaces/feed"
 const router = express.Router()
 

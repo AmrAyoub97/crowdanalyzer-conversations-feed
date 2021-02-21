@@ -11,16 +11,19 @@ const filtersSchema = new MongoSchema({
     type: [String],
     enum: ["male", "female", "virtual"],
     lowercase: true,
+    default: undefined,
   },
   dialect: {
     type: [String],
     enum: ["gf", "std", "eg"],
     lowercase: true,
+    default: undefined,
   },
   language: {
     type: [String],
     enum: ["ar", "en"],
     lowercase: true,
+    default: undefined,
   },
   followers_count_range: followersCountRangeSchema,
 })

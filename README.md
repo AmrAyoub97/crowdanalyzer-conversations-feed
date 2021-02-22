@@ -1,7 +1,5 @@
 # CrowdAnalyzer Backend Challenge
 
-### Description
-
 ## The Problem
 
 When capturing online conversations for our clients (ex: tweets, posts, comments ...etc), Crowd Analyzer processes and analyzes a large stream of data and saves it in Elasticsearch (search engine). We have recently been asked to view these data based on a selected feed.

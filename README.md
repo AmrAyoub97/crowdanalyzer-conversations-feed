@@ -49,9 +49,10 @@ Create Feeds and Filter Conversations, through the endpoints.
     id: number
     followers_count: number
   }
-}```
+}
+```
 - Feed
-`{
+```{
   name: string
   filters: {
   gender?: ["male" | "female" | "virtual"]
@@ -62,7 +63,8 @@ Create Feeds and Filter Conversations, through the endpoints.
     lte?: number | null
   }
 }
-}`
+}
+```
 
 | Action                       | Endpoint URL      | Verb | Request Body | Response |
 | ---------------------------- | ----------------- | ---- | ------------ | -------- |

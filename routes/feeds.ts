@@ -24,7 +24,10 @@ router.get(
   "/",
   async (request: express.Request, response: express.Response) => {
     try {
-      const feeds = await Feeds.find({}).select("- _id")
+      const feeds = await Feeds.find({}).select({
+        _id: 0,
+        __v: 0,
+      })
       return response.status(200).send(feeds)
     } catch (error) {
       return response.sendStatus(500)

@@ -52,7 +52,8 @@ Create Feeds and Filter Conversations, through the endpoints.
 }
 ```
 - Feed
-```{
+```
+{
   name: string
   filters: {
   gender?: ["male" | "female" | "virtual"]
@@ -62,11 +63,11 @@ Create Feeds and Filter Conversations, through the endpoints.
     gte?: number | null
     lte?: number | null
   }
-}
+ }
 }
 ```
 
 | Action                       | Endpoint URL      | Verb | Request Body | Response |
 | ---------------------------- | ----------------- | ---- | ------------ | -------- |
 | Create New Feed              | /feeds            | POST |      `Feed`        | `{"feed_name":****}`       |
-| Filter Conversations By Feed | /feeds/:feed_name | GET  |-| `Array[Conversations]`       |
+| Filter Conversations By Feed | /feeds/:feed_name | GET  |-| `Array[Conversation]`       |

@@ -41,28 +41,28 @@ Create Feeds and Filter Conversations, through the endpoints.
 - Conversation
 ```
 {
-  id: number
-  text: string
-  user_gender: "male" | "female" | "virtual"
-  lang: "ar" | "en"
-  dialect: "eg" | "gf" | "std"
+  id
+  text
+  user_gender
+  lang
+  dialect
   user: {
-    id: number
-    followers_count: number
+    id
+    followers_count
   }
 }
 ```
 - Feed
 ```
 {
-  name: string
+  name
   filters: {
-  gender?: ["male" | "female" | "virtual"]
-  language?: ["ar" | "en"]
-  dialect?: ["eg" | "gf" | "std"]
+  gender
+  language
+  dialect
   followers_count_range?: {
-    gte?: number | null
-    lte?: number | null
+    gte
+    lte
   }
  }
 }
@@ -71,4 +71,5 @@ Create Feeds and Filter Conversations, through the endpoints.
 | Action                       | Endpoint URL      | Verb | Request Body | Response |
 | ---------------------------- | ----------------- | ---- | ------------ | -------- |
 | Create New Feed              | /feeds            | POST |      `Feed`        | `{"feed_name":****}`       |
+| List All Feeds              | /feeds            | GET |      -       |  `Array[Feed]`       |
 | Filter Conversations By Feed | /feeds/:feed_name | GET  |-| `Array[Conversation]`       |

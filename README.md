@@ -39,7 +39,8 @@ Create Feeds and Filter Conversations, through the endpoints.
 
 ### API Description
 - Conversation
-```{
+```
+{
   id: number
   text: string
   user_gender: "male" | "female" | "virtual"

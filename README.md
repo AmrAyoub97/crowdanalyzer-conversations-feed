@@ -38,8 +38,37 @@ Create Feeds and Filter Conversations, through the endpoints.
 - NodeJS (Express) App
 
 ### API Description
+- Conversation
+```
+{
+  id: number
+  text: string
+  user_gender: "male" | "female" | "virtual"
+  lang: "ar" | "en"
+  dialect: "eg" | "gf" | "std"
+  user: {
+    id: number
+    followers_count: number
+  }
+}
+```
+- Feed
+```
+{
+  name: string
+  filters: {
+  gender?: ["male" | "female" | "virtual"]
+  language?: ["ar" | "en"]
+  dialect?: ["eg" | "gf" | "std"]
+  followers_count_range?: {
+    gte?: number | null
+    lte?: number | null
+  }
+ }
+}
+```
 
 | Action                       | Endpoint URL      | Verb | Request Body | Response |
 | ---------------------------- | ----------------- | ---- | ------------ | -------- |
-| Create New Feed              | /feeds            | POST |              | ``       |
-| Filter Conversations By Feed | /feeds/:feed_name | GET  |              | ``       |
+| Create New Feed              | /feeds            | POST |      `Feed`        | `{"feed_name":****}`       |
+| Filter Conversations By Feed | /feeds/:feed_name | GET  |-| `Array[Conversation]`       |
